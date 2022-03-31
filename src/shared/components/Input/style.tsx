@@ -27,9 +27,9 @@ export const Label = styled.label<{width?: string, margin?: string}>`
 
 export const InputContainer = styled.div<{width?: string, margin?: string}>`
     padding: 10px;
-    width: ${({width}) => width || '100%'};
+    width: ${ ({ width }) => width || '100%' };
     min-height: 20px;
-    margin: ${({width}) => width || '5px 0px'};
+    margin: ${ ({ width }) => width || '5px 0px' };
 `
 export const Error = styled.div<{width?: string, margin?: string}>`
     width: 100%;
