@@ -10,13 +10,9 @@ export const Container = styled.div`
     align-items:flex-start;
 `
 export const Content = styled.div`
-width: 100vw;
-height: calc(100vh - 60px);
-top: 60px;
-left: 0;
-justify-content: center;
-align-items: center;
-background: #f0f0f0;
-padding-top: 30px;
-padding-bottom: 30px;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: #f0f0f0;
 `

@@ -6,5 +6,6 @@ const RegisterPage = () => {
     )
 }
 RegisterPage.path = '/register'
+RegisterPage.useLayout = false
 
 export default RegisterPage

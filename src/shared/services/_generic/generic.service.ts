@@ -20,7 +20,8 @@ const Service = class <T = any> {
     }
 
     async findAll (params?: any) {
-        const res = await axios.get<Result<T[]>>(API_URL(this.service))
+        const query = Object.entries(params.query).map(x =>`${ x[0] }=${ x[1] }&`).join('')
+        const res = await axios.get<Result<T[]>>(API_URL(this.service, `&${ query }`))
         return res.data
     }
 

@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import ALL_PAGE from 'shared/pages';
 import { AuthProvider } from './shared/context/auth.context';
 import { QueryClientProvider } from 'react-query'
@@ -9,17 +9,21 @@ import { Layout } from 'shared/components/layout';
 
 library.add(fas as any) // añado la librería de iconos
 
+const Redirect = ({ to }: {to: string})=><Navigate to={to} />
+
 function App() {
     return (
         <>
             <AuthProvider>
                 <QueryClientProvider client={queryClient}>
                     <Routes>
-                        {ALL_PAGE.map(((Page, index) => (
+                        <Route path='/' element={<Redirect to='login' />} ></Route>
+                        {ALL_PAGE.map(((Page: any, index) => (
                             <Route path={Page.path} key={`route-${ index }`} element={
-                                <Layout>
+                                Page.useLayout ? <Layout>
                                     <Page/>
-                                </Layout>
+                                </Layout> :
+                                    <Page/>
                             }>
                             </Route>
                         )))}

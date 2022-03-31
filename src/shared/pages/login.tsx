@@ -7,4 +7,6 @@ const LoginPage = () => {
     )
 }
 LoginPage.path = '/login'
+LoginPage.useLayout = false
+
 export default LoginPage

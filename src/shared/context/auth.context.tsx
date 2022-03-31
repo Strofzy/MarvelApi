@@ -1,6 +1,8 @@
 import { FC, useContext, useState, createContext, useEffect } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, User, signOut as signOutFirebase } from 'firebase/auth'
 import app from 'shared/services/firebase.config';
+import { useNavigate } from 'react-router-dom';
+import { useAlert } from '../components/Alert/useAlert';
 
 export type TUser = {
     email: string
@@ -12,22 +14,25 @@ export interface IAuthContext {
     currentUser: User | null
     createUser: (dataUser: TUser) => void
     signIn: (dataUser: TUser) => void
-    signOut: (dataUser: TUser) => void
+    signOut: () => void
 }
 
 // Context authentication
 export const AuthContext = createContext<IAuthContext>({} as unknown as IAuthContext)
-
 // Custom hook to access context values
 export const useAuth = () => useContext(AuthContext)
 
 // Context authentication provider
 export const AuthProvider: FC = ({ children }) => {
+    const { show } = useAlert()
 
     // States
+    const navigation = useNavigate()
     const [isLogged, setIsLogged] = useState(true)
     const [currentUser, setCurrentUser] = useState<User | null>(null)
 
+    console.log(currentUser)
+    console.log(isLogged)
     //Auth
     const auth = getAuth(app)
 
@@ -43,6 +48,11 @@ export const AuthProvider: FC = ({ children }) => {
             .then(res => {
                 setIsLogged(true)
                 setCurrentUser(res.user)
+                show({
+                    message: 'Registro exitoso',
+                    type:'success'
+                })
+                navigation('/')
             }).catch(() => {
                 setIsLogged(false)
             })
@@ -60,9 +70,18 @@ export const AuthProvider: FC = ({ children }) => {
             .then(res => {
                 setIsLogged(true),
                 setCurrentUser(res.user)
+                show({
+                    message: 'Sesión iniciada',
+                    type:'success'
+                })
+                navigation('/home')
             })
             .catch(() => {
                 setIsLogged(false)
+                show({
+                    message: 'Los campos no coinciden',
+                    type:'warning'
+                })
             })
     }
 
@@ -75,6 +94,11 @@ export const AuthProvider: FC = ({ children }) => {
             .then(() => {
                 setIsLogged(true),
                 setCurrentUser(null)
+                show({
+                    message: 'Sesión Cerrada',
+                    type:'success'
+                })
+                navigation('/')
             })
             .catch(() => {
                 //Error Code

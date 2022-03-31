@@ -1,12 +1,17 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FC } from 'react'
-import { BoxCard, BoxDescription, BoxImg, ContainerBottom, DivInfo, SpanInfo } from './styled'
-import { TCardComicsView } from './types'
+import { useNavigate } from 'react-router-dom'
+import { BoxCard, BoxDescription, BoxImg, Container, DivInfo, IconHeart, SpanInfo } from './styled'
+import { TFavoritesView } from './types'
 
-export const CardComicsView: FC<TCardComicsView> = ({ dataComics }: TCardComicsView) => {
+export const FavoritesView: FC<TFavoritesView> = ({ dataComics }: TFavoritesView) => {
+
+    const navigate = useNavigate()
 
     return (
-        <ContainerBottom>
-            {dataComics?.data?.results.map((x:any, i:number) => <BoxCard key={i}>
+        <Container>
+            {dataComics?.data?.results.map((x:any, i:number) => <BoxCard onClick={() => navigate(`/comicInfo/${ x?.id }`)} key={i}>
+                <IconHeart><FontAwesomeIcon icon={'heart'} size='1x' color='gray' /></IconHeart>
                 <BoxImg>
                     <img src={`${ x?.thumbnail.path }.${ x?.thumbnail?.extension }`} width='100%' alt='IMG' />
                 </BoxImg>
@@ -26,6 +31,6 @@ export const CardComicsView: FC<TCardComicsView> = ({ dataComics }: TCardComicsV
                 </BoxDescription>
             </BoxCard>
             )}
-        </ContainerBottom>
+        </Container>
     )
 }

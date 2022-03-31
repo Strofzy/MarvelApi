@@ -80,7 +80,7 @@ export const ButtonIn = styled.button`
     padding:7px;
     border-radius:6px;
     border:none;
-    background-color: ${ ({ theme })=> theme.PColor };
+    background-color: #7b1216;
     justify-content:center;
     align-items:center;
     color: #fff;

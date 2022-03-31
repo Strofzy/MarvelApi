@@ -1,8 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FC, useState } from 'react'
-import { BoxInput, DivIconSearch, DivSectionsTop, Input, Container } from './styled'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from 'shared/context/auth.context'
+import { BoxInput, DivIconSearch, DivSectionsTop, Input, Container, SpanButton } from './styled'
 
 export const Nav :FC = () => {
+
+    const { signOut } = useAuth()
+
+    const navigate = useNavigate()
 
     const [dataForm, setDataForm] = useState({ search: '' })
 
@@ -20,7 +26,7 @@ export const Nav :FC = () => {
     return (
         <Container>
             <DivSectionsTop>
-                <img src='/logoM.png' alt='Wow' width='200px' height='100px' />
+                <img style={{ cursor:'pointer' }} onClick={() => navigate('/home')} src='/logoMM.png' alt='Wow' width='150px' height='100px' />
             </DivSectionsTop>
             <DivSectionsTop>
                 <BoxInput>
@@ -31,7 +37,8 @@ export const Nav :FC = () => {
                 </BoxInput>
             </DivSectionsTop>
             <DivSectionsTop>
-                <FontAwesomeIcon cursor='pointer' icon='close' size='1x' color='#d2d2d2' />
+                <SpanButton onClick={() => navigate('/favorites')}> Favoritos </SpanButton>
+                <SpanButton onClick={() => signOut()}> Cerrar sesión </SpanButton>
             </DivSectionsTop>
         </Container>
     )

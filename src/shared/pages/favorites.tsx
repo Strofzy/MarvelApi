@@ -1,12 +1,12 @@
+import { FavoritesContainer } from 'core/favorites/favorites.container'
 
 const FavoritesPage = () => {
     return (
-        <div>
-                Favorite Route
-        </div>
+        <FavoritesContainer />
     )
 }
 
 FavoritesPage.path = '/favorites'
+FavoritesPage.useLayout = true
 
 export default FavoritesPage

@@ -46,4 +46,14 @@ export const DivSectionsTop = styled.div`
     justify-content:center;
     align-items:center;
     width:33%;
+    gap:30px;
+`
+export const SpanButton = styled.span`
+    border-bottom:1px solid transparent;
+    width:auto;
+    transition:.6s;
+    cursor:pointer;
+    :hover{
+        border-bottom:1px solid gray;
+    }
 `
