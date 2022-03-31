@@ -1,14 +1,11 @@
-import { Route } from 'react-router-dom';
 
 const DetailCardPage = () => {
     return (
-        <Route
-            path="/detailCard"
-            element={<div>
+        <div>
                 DetailCard Route
-            </div>}
-        />
+        </div>
     )
 }
+DetailCardPage.path = '/detailCard'
 
 export default DetailCardPage

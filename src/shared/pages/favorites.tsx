@@ -1,14 +1,12 @@
-import { Route } from 'react-router-dom';
 
 const FavoritesPage = () => {
     return (
-        <Route
-            path="/favorites"
-            element={<div>
+        <div>
                 Favorite Route
-            </div>}
-        />
+        </div>
     )
 }
+
+FavoritesPage.path = '/favorites'
 
 export default FavoritesPage
