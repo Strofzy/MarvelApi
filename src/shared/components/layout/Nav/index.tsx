@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from 'shared/context/auth.context'
+import { ComicContext } from 'shared/context/comic.context'
 import { BoxInput, DivIconSearch, DivSectionsTop, Input, Container, SpanButton } from './styled'
 
-export const Nav :FC = () => {
-
+export const Nav:FC = () => {
+    const { search } = useContext(ComicContext)
     const { signOut } = useAuth()
 
     const navigate = useNavigate()
@@ -19,10 +20,6 @@ export const Nav :FC = () => {
         })
     }
 
-    const Search = () => {
-        console.log('w')
-    }
-
     return (
         <Container>
             <DivSectionsTop>
@@ -31,7 +28,7 @@ export const Nav :FC = () => {
             <DivSectionsTop>
                 <BoxInput>
                     <Input placeholder='Busca tu comic aquí' name='search' value={dataForm.search} onChange={handleChange} />
-                    <DivIconSearch onClick={() => Search()}>
+                    <DivIconSearch onClick={() => search(dataForm.search)}>
                         <FontAwesomeIcon icon='search' color='#000' size='1x' />
                     </DivIconSearch>
                 </BoxInput>

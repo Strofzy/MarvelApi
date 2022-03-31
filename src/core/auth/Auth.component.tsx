@@ -46,6 +46,8 @@ export const AuthView: FC<TAuthView> = ({ handleChange, page, handleSubmit, data
                                 id="outlined-basic"
                                 label="Correo Electrónico"
                                 variant="outlined"
+                                name='email'
+                                value={dataForm?.email}
                                 fullWidth
                                 onChange={handleChange}
                                 size="small"

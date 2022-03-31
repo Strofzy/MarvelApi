@@ -6,6 +6,7 @@ import { queryClient } from 'shared/services/client.config';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { Layout } from 'shared/components/layout';
+import { ComicProvider } from 'shared/context/comic.context';
 
 library.add(fas as any) // añado la librería de iconos
 
@@ -15,20 +16,22 @@ function App() {
     return (
         <>
             <AuthProvider>
-                <QueryClientProvider client={queryClient}>
-                    <Routes>
-                        <Route path='/' element={<Redirect to='login' />} ></Route>
-                        {ALL_PAGE.map(((Page: any, index) => (
-                            <Route path={Page.path} key={`route-${ index }`} element={
-                                Page.useLayout ? <Layout>
-                                    <Page/>
-                                </Layout> :
-                                    <Page/>
-                            }>
-                            </Route>
-                        )))}
-                    </Routes>
-                </QueryClientProvider>
+                <ComicProvider>
+                    <QueryClientProvider client={queryClient}>
+                        <Routes>
+                            <Route path='/' element={<Redirect to='login' />} ></Route>
+                            {ALL_PAGE.map(((Page: any, index) => (
+                                <Route path={Page.path} key={`route-${ index }`} element={
+                                    Page.useLayout ? <Layout>
+                                        <Page/>
+                                    </Layout> :
+                                        <Page/>
+                                }>
+                                </Route>
+                            )))}
+                        </Routes>
+                    </QueryClientProvider>
+                </ComicProvider>
             </AuthProvider>
         </>
     )

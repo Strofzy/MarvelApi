@@ -28,11 +28,9 @@ export const AuthProvider: FC = ({ children }) => {
 
     // States
     const navigation = useNavigate()
-    const [isLogged, setIsLogged] = useState(true)
+    const [isLogged, setIsLogged] = useState(false)
     const [currentUser, setCurrentUser] = useState<User | null>(null)
 
-    console.log(currentUser)
-    console.log(isLogged)
     //Auth
     const auth = getAuth(app)
 
@@ -92,7 +90,7 @@ export const AuthProvider: FC = ({ children }) => {
     const signOut = () => {
         signOutFirebase(auth)
             .then(() => {
-                setIsLogged(true),
+                setIsLogged(false),
                 setCurrentUser(null)
                 show({
                     message: 'Sesión Cerrada',
@@ -108,6 +106,10 @@ export const AuthProvider: FC = ({ children }) => {
     useEffect(() => {
         setCurrentUser(auth.currentUser)
     }, [auth])
+
+    useEffect(() => {
+        isLogged ? navigation('/home') : navigation('/login')
+    }, [isLogged])
 
     return (
         <AuthContext.Provider value={{
