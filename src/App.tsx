@@ -1,12 +1,11 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import ALL_PAGE from 'shared/pages';
 import { AuthProvider } from './shared/context/auth.context';
-import { QueryClientProvider } from 'react-query'
-import { queryClient } from 'shared/services/client.config';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { Layout } from 'shared/components/layout';
-import { ComicProvider } from 'shared/context/comic.context';
+import { ComicContextProvider } from 'shared/context/comic.context';
+import { FavoritesContextProvider } from 'core/favorites/favorites.context';
 
 library.add(fas as any) // añado la librería de iconos
 
@@ -16,8 +15,8 @@ function App() {
     return (
         <>
             <AuthProvider>
-                <ComicProvider>
-                    <QueryClientProvider client={queryClient}>
+                <ComicContextProvider>
+                    <FavoritesContextProvider>
                         <Routes>
                             <Route path='/' element={<Redirect to='login' />} ></Route>
                             {ALL_PAGE.map(((Page: any, index) => (
@@ -30,8 +29,8 @@ function App() {
                                 </Route>
                             )))}
                         </Routes>
-                    </QueryClientProvider>
-                </ComicProvider>
+                    </FavoritesContextProvider>
+                </ComicContextProvider>
             </AuthProvider>
         </>
     )

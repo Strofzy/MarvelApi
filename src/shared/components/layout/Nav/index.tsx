@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from 'shared/context/auth.context'
 import { ComicContext } from 'shared/context/comic.context'
 import { BoxInput, DivIconSearch, DivSectionsTop, Input, Container, SpanButton } from './styled'
+import { faHeart, faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 export const Nav:FC = () => {
     const { search } = useContext(ComicContext)
@@ -34,8 +35,16 @@ export const Nav:FC = () => {
                 </BoxInput>
             </DivSectionsTop>
             <DivSectionsTop>
-                <SpanButton onClick={() => navigate('/favorites')}> Favoritos </SpanButton>
-                <SpanButton onClick={() => signOut()}> Cerrar sesión </SpanButton>
+                <SpanButton onClick={() => navigate('/favorites')}>
+                Favoritos
+                &nbsp;
+                    <FontAwesomeIcon color='#f00' icon={faHeart}/>
+                </SpanButton>
+                <SpanButton onClick={() => signOut()}>
+                    Cerrar sesión
+                    &nbsp;
+                    <FontAwesomeIcon icon={faSignOut}/>
+                </SpanButton>
             </DivSectionsTop>
         </Container>
     )

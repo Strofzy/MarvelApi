@@ -4,7 +4,7 @@ import ComicsService from 'shared/services/comics/comics.services';
 
 export const ComicContext = React.createContext<any>(null)
 
-export const ComicProvider: FC = ({ children }) => {
+export const ComicContextProvider: FC = ({ children }) => {
     const [comics, setComics] = useState()
     const [pagination, setPagination] = useState<any>({
         total: 0,

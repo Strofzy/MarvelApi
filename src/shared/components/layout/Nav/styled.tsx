@@ -51,6 +51,7 @@ export const DivSectionsTop = styled.div`
 export const SpanButton = styled.span`
     border-bottom:1px solid transparent;
     width:auto;
+    padding: 5px 0;
     transition:.6s;
     cursor:pointer;
     :hover{

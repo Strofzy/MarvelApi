@@ -73,3 +73,8 @@ export const SpanInfo = styled.span`
     font-size:13px;
 `
 
+export const Strong = styled.strong`
+    display: block;
+    margin: 2em auto; 
+    width: max-content;
+`

@@ -1,16 +1,19 @@
 import { FC } from 'react'
-import { useQuery } from 'react-query'
-import ComicsService from 'shared/services/comics/comics.services'
 import { FavoritesView } from './favorites.components'
+import { useFavoritesContext } from './favorites.context'
 
 export const FavoritesContainer: FC = () => {
 
-    //Queries
-    const { data: dataComics } = useQuery('comics', () => ComicsService.findAll({}))
+    const { favoriteList, deleteFavorite } = useFavoritesContext()
+
+    const handleDeleteFavorites = (favorite: any) => {
+        deleteFavorite(favorite)
+    }
 
     return (
         <FavoritesView
-            dataComics={dataComics}
+            handleDeleteFavorites={handleDeleteFavorites}
+            dataComics={favoriteList}
         />
     )
 }

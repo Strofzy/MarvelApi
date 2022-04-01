@@ -2,6 +2,9 @@ import { FC, useEffect, useState } from 'react';
 import { BoxCard, BoxContainer, BoxContainerVariant, BoxDescription, BoxVariant, Container, ContainerSection, DivInfo, SpanInfo, SpanTitle } from './styled'
 import { /* useNavigate */ useParams } from 'react-router-dom';
 import ComicsService from 'shared/services/comics/comics.services';
+import { Button } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export const ComicDetailView: FC = () => {
     //CUSTOM STATES

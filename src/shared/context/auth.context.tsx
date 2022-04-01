@@ -1,5 +1,5 @@
 import { FC, useContext, useState, createContext, useEffect } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, User, signOut as signOutFirebase } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, User, signOut as signOutFirebase } from 'firebase/auth'
 import app from 'shared/services/firebase.config';
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from '../components/Alert/useAlert';
@@ -29,6 +29,7 @@ export const AuthProvider: FC = ({ children }) => {
     // States
     const navigation = useNavigate()
     const [isLogged, setIsLogged] = useState(false)
+    const [isRetryLogin, setIsRetryLogin] = useState(false)
     const [currentUser, setCurrentUser] = useState<User | null>(null)
 
     //Auth
@@ -103,13 +104,26 @@ export const AuthProvider: FC = ({ children }) => {
             })
     }
 
+    const retryLogin = () => {
+        setIsRetryLogin(true)
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                setCurrentUser(user)
+                setIsLogged(true)
+            }
+            setIsRetryLogin(false)
+        })
+    }
+
     useEffect(() => {
-        setCurrentUser(auth.currentUser)
-    }, [auth])
+        retryLogin()
+    }, [])
 
     useEffect(() => {
         isLogged ? navigation('/home') : navigation('/login')
     }, [isLogged])
+
+    if (isRetryLogin) return <div/>
 
     return (
         <AuthContext.Provider value={{

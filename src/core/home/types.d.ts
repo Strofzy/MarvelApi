@@ -5,5 +5,6 @@ export type THomeView = {
     fetchPagination: (skip: number) => void
     pagination:any
     setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+    handleAddFavorites: (id: any) => void
 
 }

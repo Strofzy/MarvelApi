@@ -30,6 +30,7 @@ export const AuthView: FC<TAuthView> = ({ handleChange, page, handleSubmit, data
                                 id="outlined-basic"
                                 label="Contraseña"
                                 variant="outlined"
+                                type='password'
                                 fullWidth
                                 name='pass'
                                 value={dataForm?.pass}
@@ -58,6 +59,7 @@ export const AuthView: FC<TAuthView> = ({ handleChange, page, handleSubmit, data
                                 variant="outlined"
                                 fullWidth
                                 name='pass'
+                                type='password'
                                 value={dataForm?.pass}
                                 onChange={handleChange}
                                 size="small"
@@ -68,6 +70,7 @@ export const AuthView: FC<TAuthView> = ({ handleChange, page, handleSubmit, data
                                 variant="outlined"
                                 fullWidth
                                 name='confirmPass'
+                                type='password'
                                 value={dataForm?.confirmPass}
                                 onChange={handleChange}
                                 size="small"
